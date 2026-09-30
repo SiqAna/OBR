@@ -4,15 +4,15 @@ from picamera import PiCamera
 import cv2
 import time
 import numpy as np #números fofuchos, o time sleep tá aqui
-from adafruit_motorkit import MotorKit #biblioteca que reconhece os motores
-kit = MotorKit()
 
-GPIO.setmode(GPIO.BCM)
-
-GPIO.setup(dirF, GPIO.OUT)
-GPIO.setup(dirT, GPIO.OUT)
-GPIO.setup(esqF, GPIO.OUT)
-GPIO.setup(esqT, GPIO.OUT)
+GPIO.setmode(dirFF, GPIO.OUT)
+GPIO.setmode(dirFT, GPIO.OUT)
+GPIO.setmode(dirTF, GPIO.OUT)
+GPIO.setmode(dirTT, GPIO.OUT)
+GPIO.setmode(esqFF, GPIO.OUT)
+GPIO.setmode(esqFT, GPIO.OUT)
+GPIO.setmode(esqTF, GPIO.OUT)
+GPIO.setmode(esqTT, GPIO.OUT)
 
 def direita():
     
