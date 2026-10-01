@@ -5,14 +5,19 @@ import cv2
 import time
 import numpy as np 
 
-GPIO.setmode(dirFF, GPIO.OUT)
-GPIO.setmode(dirFT, GPIO.OUT)
-GPIO.setmode(dirTF, GPIO.OUT)
-GPIO.setmode(dirTT, GPIO.OUT)
-GPIO.setmode(esqFF, GPIO.OUT)
-GPIO.setmode(esqFT, GPIO.OUT)
-GPIO.setmode(esqTF, GPIO.OUT)
-GPIO.setmode(esqTT, GPIO.OUT)
+dirFF, dirFT = 1, 2
+dirTF, dirTT = 3, 4
+esqFF, esqFT = 5, 6
+esqTF, esqTT = 7, 8
+
+GPIO.setup(dirFF, GPIO.OUT)
+GPIO.setup(dirFT, GPIO.OUT)
+GPIO.setup(dirTF, GPIO.OUT)
+GPIO.setup(dirTT, GPIO.OUT)
+GPIO.setup(esqFF, GPIO.OUT)
+GPIO.setup(esqFT, GPIO.OUT)
+GPIO.setup(esqTF, GPIO.OUT)
+GPIO.setup(esqTT, GPIO.OUT)
 
 pwm_dirFF = GPIO.PWM(dirFF, 100)
 pwm_dirFT = GPIO.PWM(dirFT, 100)
@@ -82,7 +87,7 @@ def virar180(vel = 50): #feito
     time.sleep(4)
 
 def intersecao(): #feito
-    parar(vel = 0)
+    parar()
     time.sleep(1.5)
     frente(vel = 50)
 
