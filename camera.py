@@ -3,7 +3,7 @@ from picamera.array import PiRGBArray
 from picamera import PiCamera
 import cv2
 import time
-import numpy as np #números fofuchos, o time sleep tá aqui
+import numpy as np 
 
 GPIO.setmode(dirFF, GPIO.OUT)
 GPIO.setmode(dirFT, GPIO.OUT)
