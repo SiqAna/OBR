@@ -14,71 +14,86 @@ GPIO.setmode(esqFT, GPIO.OUT)
 GPIO.setmode(esqTF, GPIO.OUT)
 GPIO.setmode(esqTT, GPIO.OUT)
 
-def direita():
+pwm_dirFF = GPIO.PWM(dirFF, 100)
+pwm_dirFT = GPIO.PWM(dirFT, 100)
+pwm_dirTF = GPIO.PWM(dirTF, 100)
+pwm_dirTT = GPIO.PWM(dirTT, 100)
+pwm_esqFF = GPIO.PWM(esqFF, 100)
+pwm_esqFT = GPIO.PWM(esqFT, 100)
+pwm_esqTF = GPIO.PWM(esqTF, 100)
+pwm_esqTT = GPIO.PWM(esqTT, 100)
+
+pwms = [pwm_dirFF, pwm_dirFT, pwm_dirTF, pwm_dirTT, pwm_esqFF, pwm_esqFT, pwm_esqTF, pwm_esqTT]
+
+vel = 0
+
+for pwm in pwms:
+    pwm.start(20)
+
+def parar(): #feito
+    for pwm in pwms: 
+        pwm.ChangeDutyCycle(0)
+
+def frente(vel = 50): #feito
+    pwm_dirFF.ChangeDutyCycle(vel)
+    pwm_dirFT.ChangeDutyCycle(0)
+    pwm_dirTF.ChangeDutyCycle(vel)
+    pwm_dirTT.ChangeDutyCycle(0)
     
-    parar()
-    time.sleep(1)
-
-    kit.motor1.throttle = 0.5  # M1: Frente Esquerda
-    kit.motor2.throttle = -0.5  # M2: Trás Esquerda
-    kit.motor3.throttle = 0.5  # M3: Trás Direita
-    kit.motor4.throttle = -0.5  # M4: Frente Direita
-
-def esquerda():
-
-    parar()
-    time.sleep(1)
-
-    kit.motor1.throttle = -0.5  # M1: Frente Esquerda
-    kit.motor2.throttle = 0.5  # M2: Trás Esquerda
-    kit.motor3.throttle = -0.5  # M3: Trás Direita
-    kit.motor4.throttle = 0.5  # M4: Frente Direita
+    pwm_esqFF.ChangeDutyCycle(vel)
+    pwm_esqFT.ChangeDutyCycle(0)
+    pwm_esqTF.ChangeDutyCycle(vel)
+    pwm_esqTT.ChangeDutyCycle(0)
     
-    time.sleep(2)
+def direita(vel = 50): #feito
+    pwm_dirFF.ChangeDutyCycle(0)
+    pwm_dirFT.ChangeDutyCycle(vel)
+    pwm_dirTF.ChangeDutyCycle(0)
+    pwm_dirTT.ChangeDutyCycle(vel)
+    
+    pwm_esqFF.ChangeDutyCycle(vel)
+    pwm_esqFT.ChangeDutyCycle(0)
+    pwm_esqTF.ChangeDutyCycle(vel)
+    pwm_esqTT.ChangeDutyCycle(0)
 
+def esquerda(vel = 50): #feito
 
-def virar180():
+    pwm_dirFF.ChangeDutyCycle(vel)
+    pwm_dirFT.ChangeDutyCycle(0)
+    pwm_dirTF.ChangeDutyCycle(vel)
+    pwm_dirTT.ChangeDutyCycle(0)
+    
+    pwm_esqFF.ChangeDutyCycle(0)
+    pwm_esqFT.ChangeDutyCycle(vel)
+    pwm_esqTF.ChangeDutyCycle(0)
+    pwm_esqTT.ChangeDutyCycle(vel)
 
-    parar()
-    time.sleep(1)
-
-    kit.motor1.throttle = -0.5  # M1: Frente Esquerda
-    kit.motor2.throttle = 0.5  # M2: Trás Esquerda
-    kit.motor3.throttle = -0.5  # M3: Trás Direita
-    kit.motor4.throttle = 0.5  # M4: Frente Direita
-
+def virar180(vel = 50): #feito
+    pwm_dirFF.ChangeDutyCycle(vel)
+    pwm_dirFT.ChangeDutyCycle(0)
+    pwm_dirTF.ChangeDutyCycle(vel)
+    pwm_dirTT.ChangeDutyCycle(0)
+    
+    pwm_esqFF.ChangeDutyCycle(0)
+    pwm_esqFT.ChangeDutyCycle(vel)
+    pwm_esqTF.ChangeDutyCycle(0)
+    pwm_esqTT.ChangeDutyCycle(vel)
+    
     time.sleep(4)
 
-def intersecao():
-
-    parar()
+def intersecao(): #feito
+    parar(vel = 0)
     time.sleep(1.5)
+    frente(vel = 50)
 
-    frente()
-
-
-def frente():
-    
-    kit.motor1.throttle = 0.5  # M1: Frente Esquerda
-    kit.motor2.throttle = 0.5  # M2: Trás Esquerda
-    kit.motor3.throttle = 0.5  # M3: Trás Direita
-    kit.motor4.throttle = 0.5  # M4: Frente Direita
-
-def arena():
+def arena(): #não feito
     
     parar()
     time.sleep(1)
 
     código
 
-def parar():
-    
-    kit.motor1.throttle = 0  # M1: Frente Esquerda
-    kit.motor2.throttle = 0  # M2: Trás Esquerda
-    kit.motor3.throttle = 0  # M3: Trás Direita
-    kit.motor4.throttle = 0  # M4: Frente Direita
-
-def camerasegue():
+def camerasegue(): #não feito
 
 pretoDireita = PiCamera.cor.pretoDireita
 pretoEsquerda = PiCamera.cor.pretoEsquerda    
@@ -91,7 +106,7 @@ cameraIntersecao = PiCamera.intersecao
 DistanciaUltrassom1 = GPIO.input(23)
 DistanciaUltrassom2 = GPIO.input(24)
 
-def seguelinha(): 
+def seguelinha(): #não feito
 
     if verdeDireita == True:
         direita()
